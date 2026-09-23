@@ -36,7 +36,7 @@ export const registerUser = asyncHandler(async (req, res) => {
 // User login
 export const loginUser = asyncHandler(async (req, res) => {
     const { email, password } = req.body;
-    const user = await getUserByEmail(email);
+    const user = await getUserByEmail(email).select('+password');
     if(!user) throw new AppError('User not found', 400, 'USER_NOT_EXISTS');
 
     // Compare the password
